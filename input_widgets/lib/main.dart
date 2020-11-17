@@ -25,6 +25,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
+  var _textValue = "";
+  var _value = "";
+
+  void _onTextFieldChange(String givenValue) {
+    setState(() {
+      _value = "Changed value: $givenValue";
+    });
+  }
+
+  void _onTextFieldSubmit(String givenValue) {
+    setState(() {
+      _value = "Submitted value: $givenValue";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -61,7 +76,19 @@ class _State extends State<MyApp> {
             // axis because Columns are vertical (the cross axis would be
             // horizontal).
             children: <Widget>[
-              new Text("Hello World!"),
+              new Text(_value),
+              new TextField(
+                decoration: new InputDecoration(
+                    labelText: 'Hello',
+                    hintText: "Enter your name",
+                    icon: new Icon(Icons.people)
+                ),
+                autocorrect: true, // Auto correct text.
+                autofocus: true, // Focus on the text.
+                keyboardType: TextInputType.text, // Make the keyboard a text type.
+                onChanged: _onTextFieldChange, // Function to do something as the text is changing. For ex: Show options
+                onSubmitted: _onTextFieldSubmit, // Function to do something after a text has been submitted
+              )
             ],
           ),
         ),
