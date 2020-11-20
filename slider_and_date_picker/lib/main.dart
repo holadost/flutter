@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() {
   runApp(new MaterialApp(
@@ -30,6 +31,7 @@ class _State extends State<MyApp> {
   var _textVal = "Turn on lights";
   var _sliderVal = 0.0;
   var _sliderValStr = "";
+  var _dateVal = "";
 
   // Widget reactors.
   void _onChangedSw1(bool value) => setState(() => _switchValue1 = value);
@@ -50,6 +52,20 @@ class _State extends State<MyApp> {
       _sliderVal = val;
       _sliderValStr = "Volume: " + (_sliderVal * 100).round().toString();
     });
+  }
+
+  Future selectDate() async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2016),
+        lastDate: new DateTime(2021)
+    );
+    if (picked != null) {
+      setState(() {
+        _dateVal = picked.toString();
+      });
+    }
   }
 
   // Widget constructors.
@@ -90,10 +106,19 @@ class _State extends State<MyApp> {
     return col;
   }
 
+  Widget makeDatePicker() {
+    var list = new List<Widget>();
+    list.add(new Text(_dateVal));
+    list.add(new ElevatedButton(
+        onPressed: selectDate,
+        child: new Text("Show date picker")));
+    Column col = new Column(children: list);
+    return col;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+    // This method is rerun every time setState is called.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
@@ -128,7 +153,8 @@ class _State extends State<MyApp> {
             children: <Widget>[
               makeSwitch(),
               makeSwitchTile(),
-              makeSlider()
+              makeSlider(),
+              makeDatePicker()
             ],
           ),
         ),
