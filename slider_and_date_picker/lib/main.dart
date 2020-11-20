@@ -28,8 +28,12 @@ class _State extends State<MyApp> {
   var _switchValue1 = false;
   var _switchValue2 = false;
   var _textVal = "Turn on lights";
+  var _sliderVal = 0.0;
+  var _sliderValStr = "";
 
+  // Widget reactors.
   void _onChangedSw1(bool value) => setState(() => _switchValue1 = value);
+
   void _onChangedSw2(bool value) {
     setState(() {
       _switchValue2 = value;
@@ -40,6 +44,15 @@ class _State extends State<MyApp> {
       }
     });
   }
+
+  void _onChangeSlider(double val) {
+    setState(() {
+      _sliderVal = val;
+      _sliderValStr = "Volume: " + (_sliderVal * 100).round().toString();
+    });
+  }
+
+  // Widget constructors.
   Widget makeSwitch() {
     var list = new List<Widget>();
     for(int i = 0; i < 1; i++) {
@@ -62,6 +75,16 @@ class _State extends State<MyApp> {
               color: Colors.blue,
               fontWeight: FontWeight.bold),),
         ));
+    }
+    Column col = new Column(children: list);
+    return col;
+  }
+
+  Widget makeSlider() {
+    var list = new List<Widget>();
+    for(int i = 0; i < 1; i++) {
+      list.add(new Text(_sliderValStr));
+      list.add(new Slider(value: _sliderVal, onChanged: _onChangeSlider));
     }
     Column col = new Column(children: list);
     return col;
@@ -104,7 +127,8 @@ class _State extends State<MyApp> {
             // horizontal).
             children: <Widget>[
               makeSwitch(),
-              makeSwitchTile()
+              makeSwitchTile(),
+              makeSlider()
             ],
           ),
         ),
