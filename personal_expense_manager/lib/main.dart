@@ -22,8 +22,32 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("My Expenses"),
       ),
-      body: Center(
-        child: Text("Playground"),
+      body: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(16),
+            width: double.infinity,
+            height: 50,
+            child: Card(
+              color: Colors.blue,
+              child: Text(
+                "Chart Area",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+              ),
+              elevation: 10,
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.all(16),
+              width: double.infinity,
+              child: Card(
+                child: Text("List of transactions"),
+            )
+          )
+        ],
       ),
     );
   }
