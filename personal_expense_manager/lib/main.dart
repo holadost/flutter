@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './transaction.dart';
 
 void main() {
@@ -35,10 +36,11 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               width: double.infinity,
+              height: 50,
               child: Card(
                 color: Colors.blue,
                 child: Text(
@@ -50,6 +52,33 @@ class MyHomePage extends StatelessWidget {
                 ),
                 elevation: 10,
               ),
+            ),
+            Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Title"
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: "Amount"
+                      ),
+                    ),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                            "Add transaction"),
+                        textColor: Colors.purple,
+                    )
+                  ],
+                ),
+              )
             ),
             Column(
               children: transactions.map((tx) {
@@ -79,16 +108,16 @@ class MyHomePage extends StatelessWidget {
                               tx.title,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 12,
+                                fontSize: 16,
                                 color: Colors.green,
                                 fontStyle: FontStyle.italic
                               ),
                               textAlign: TextAlign.left,
                             ),
                             Text(
-                              tx.date.toString(),
+                              DateFormat.yMMMMEEEEd().add_jm().format(tx.date),
                               style: TextStyle(
-                                fontSize: 8,
+                                fontSize: 12,
                                 color: Colors.grey,
                               ),
                               textAlign: TextAlign.left,
