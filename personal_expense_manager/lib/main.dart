@@ -27,6 +27,9 @@ class MyHomePage extends StatelessWidget {
         date: DateTime.now())
   ];
 
+  String title;
+  String amount;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,11 +67,19 @@ class MyHomePage extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Title"
                       ),
+                      onChanged: (value) {
+                        title = value;
+                        print(title);
+                      },
                     ),
                     TextField(
                       decoration: InputDecoration(
                           labelText: "Amount"
                       ),
+                      onChanged: (value) {
+                        amount = value;
+                        print(amount);
+                      },
                     ),
                     FlatButton(
                         onPressed: () {},
