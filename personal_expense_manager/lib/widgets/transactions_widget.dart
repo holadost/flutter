@@ -20,7 +20,7 @@ class TransactionsWidget extends StatelessWidget {
                       "\$" + _allTransactions[idx].amount.toStringAsPrecision(4),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.purple,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 20),
                     ),
                     decoration: BoxDecoration(border: Border.all(
@@ -39,7 +39,7 @@ class TransactionsWidget extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: Colors.green,
+                            color: Theme.of(context).primaryColor,
                             fontStyle: FontStyle.italic
                         ),
                         textAlign: TextAlign.left,
