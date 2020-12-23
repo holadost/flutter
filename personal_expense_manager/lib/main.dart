@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense_manager/widgets/add_transaction_widget.dart';
-import 'package:personal_expense_manager/widgets/transactions_widget.dart';
+import './widgets/add_transaction_widget.dart';
+import './widgets/expenses_chart_widget.dart';
+import './widgets/transactions_widget.dart';
 import './models/transaction.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       home: MyHomePage(),
+      // Check this out on how to create an app wide theme.
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amberAccent,
@@ -41,6 +43,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [];
+
+  // TODO: Figure out how list properties work.
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+          DateTime.now().subtract(
+              Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransactions(String title, double amount) {
     final newTx = Transaction(title: title, amount: amount,
@@ -75,20 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: Card(
-                    color: Colors.blue,
-                    child: Text(
-                      "Chart Area",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    elevation: 10,
-                  ),
-                ),
+                ExpensesChart(_recentTransactions),
                 TransactionsWidget(_userTransactions)
               ],
             ),
