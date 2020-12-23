@@ -36,12 +36,7 @@ class TransactionsWidget extends StatelessWidget {
                     children: [
                       Text(
                         _allTransactions[idx].title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Theme.of(context).primaryColor, // Look at ThemeData in main.dart.
-                            fontStyle: FontStyle.italic
-                        ),
+                        style: Theme.of(context).textTheme.title,
                         textAlign: TextAlign.left,
                       ),
                       Text(
