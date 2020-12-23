@@ -22,6 +22,8 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("My Expenses"),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add), onPressed: () {})],
       ),
       body: Container(
         margin: EdgeInsets.all(16),
@@ -48,7 +50,12 @@ class MyHomePage extends StatelessWidget {
             ],
           ),
         )
-      )
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {},
+      ),
     );
   }
 }

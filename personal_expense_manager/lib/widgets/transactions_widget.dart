@@ -17,7 +17,7 @@ class TransactionsWidget extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      "\$" + _allTransactions[idx].amount.toString(),
+                      "\$" + _allTransactions[idx].amount.toStringAsPrecision(4),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.purple,
