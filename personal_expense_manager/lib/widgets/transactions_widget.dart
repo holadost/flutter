@@ -10,57 +10,54 @@ class TransactionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: SingleChildScrollView(
-        child: Column(
-          children: _allTransactions.map((tx) {
-            return Card(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(
-                        "\$" + tx.amount.toString(),
+      child: ListView(
+        children: _allTransactions.map((tx) {
+          return Card(
+              child: Row(
+                children: [
+                  Container(
+                    child: Text(
+                      "\$" + tx.amount.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple,
+                          fontSize: 20),
+                    ),
+                    decoration: BoxDecoration(border: Border.all(
+                        color: Colors.purple,
+                        width: 2)),
+                    margin: EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 15),
+                    padding: EdgeInsets.all(5),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        tx.title,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.purple,
-                            fontSize: 20),
+                            fontSize: 16,
+                            color: Colors.green,
+                            fontStyle: FontStyle.italic
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      decoration: BoxDecoration(border: Border.all(
-                          color: Colors.purple,
-                          width: 2)),
-                      margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15),
-                      padding: EdgeInsets.all(5),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          tx.title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.green,
-                              fontStyle: FontStyle.italic
-                          ),
-                          textAlign: TextAlign.left,
+                      Text(
+                        DateFormat.yMMMMEEEEd().add_jm().format(tx.date),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
                         ),
-                        Text(
-                          DateFormat.yMMMMEEEEd().add_jm().format(tx.date),
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ],
-                    )
-                  ],
-                ));
-          }).toList(),
-          mainAxisAlignment: MainAxisAlignment.end,
-        ),
-      )
+                        textAlign: TextAlign.left,
+                      ),
+                    ],
+                  )
+                ],
+              ));
+        }).toList(),
+      ),
     );
   }
 }
