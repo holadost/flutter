@@ -24,7 +24,7 @@ class TransactionsWidget extends StatelessWidget {
                           fontSize: 20),
                     ),
                     decoration: BoxDecoration(border: Border.all(
-                        color: Colors.purple,
+                        color: Theme.of(context).primaryColor, // Look at ThemeData in main.dart.
                         width: 2)),
                     margin: EdgeInsets.symmetric(
                         vertical: 10,
@@ -39,7 +39,7 @@ class TransactionsWidget extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: Theme.of(context).primaryColor,
+                            color: Theme.of(context).primaryColor, // Look at ThemeData in main.dart.
                             fontStyle: FontStyle.italic
                         ),
                         textAlign: TextAlign.left,
