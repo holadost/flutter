@@ -25,27 +25,29 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 50,
-              child: Card(
-                color: Colors.blue,
-                child: Text(
-                  "Chart Area",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: Card(
+                  color: Colors.blue,
+                  child: Text(
+                    "Chart Area",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  elevation: 10,
                 ),
-                elevation: 10,
               ),
-            ),
-            MainTransactionsWidget(),
-          ],
-        ),
+              MainTransactionsWidget(),
+            ],
+          ),
+        )
       )
     );
   }
