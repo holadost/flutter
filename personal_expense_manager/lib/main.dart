@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import './models/transaction.dart';
+import './widgets/main_transactions_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,18 +17,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(id: "1", title: "New Shoes", amount: 69.99,
-        date: DateTime.now()),
-    Transaction(id: "2", title: "Groceries", amount: 29.76,
-        date: DateTime.now()),
-    Transaction(id: "3", title: "Other stuff", amount: 19.22,
-        date: DateTime.now())
-  ];
-
-  String title;
-  String amount;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,90 +43,7 @@ class MyHomePage extends StatelessWidget {
                 elevation: 10,
               ),
             ),
-            Card(
-              elevation: 5,
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: "Title"
-                      ),
-                      onChanged: (value) {
-                        title = value;
-                        print(title);
-                      },
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                          labelText: "Amount"
-                      ),
-                      onChanged: (value) {
-                        amount = value;
-                        print(amount);
-                      },
-                    ),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Text(
-                            "Add transaction"),
-                        textColor: Colors.purple,
-                    )
-                  ],
-                ),
-              )
-            ),
-            Column(
-              children: transactions.map((tx) {
-                return Card(
-                    child: Row(
-                      children: [
-                        Container(
-                          child: Text(
-                            "\$" + tx.amount.toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.purple,
-                              fontSize: 20),
-                          ),
-                          decoration: BoxDecoration(border: Border.all(
-                            color: Colors.purple,
-                            width: 2)),
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 15),
-                          padding: EdgeInsets.all(5),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              tx.title,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.green,
-                                fontStyle: FontStyle.italic
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                            Text(
-                              DateFormat.yMMMMEEEEd().add_jm().format(tx.date),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        )
-                      ],
-                    ));
-              }).toList(),
-              mainAxisAlignment: MainAxisAlignment.end,
-            ),
+            MainTransactionsWidget(),
           ],
         ),
       )
