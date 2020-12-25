@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import './chart_bar.dart';
 import '../models/transaction.dart';
 
 
@@ -22,6 +23,14 @@ class ExpensesChart extends StatelessWidget {
     });
   }
 
+  double get maxSpendInWeek {
+    double totalSum = 0.0;
+    for (var i = 0; i < groupedTransactionValues.length; i++) {
+      totalSum += double.parse(groupedTransactionValues[i]['amount'].toString());
+    }
+    return totalSum;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,7 +38,10 @@ class ExpensesChart extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Row(
         children: groupedTransactionValues.map((data) {
-          return Text('${data['day']}: ${data['amount']}');
+          print("Total Spend: $maxSpendInWeek");
+          print("Spend Pct: " + data['amount'].toString());
+          return ChartBarWidget(data['day'], data['amount'],
+              double.parse(data['amount'].toString())/maxSpendInWeek);
         }).toList(),
       ),
     );

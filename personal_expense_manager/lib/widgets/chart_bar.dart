@@ -12,7 +12,7 @@ class ChartBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('\$${spendPct.toStringAsFixed(0)}'),
+        Text('\$${amount.toStringAsFixed(0)}'),
         SizedBox(height: 4,),
         Container(
           height: 60,
