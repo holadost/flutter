@@ -36,13 +36,20 @@ class ExpensesChart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(10),
-      child: Row(
-        children: groupedTransactionValues.map((data) {
-          return ChartBarWidget(
-              data['day'],
-              data['amount'],
-              maxSpendInWeek == 0.0 ? 0.0 : double.parse(data['amount'].toString())/maxSpendInWeek);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBarWidget(
+                  data['day'],
+                  data['amount'],
+                  maxSpendInWeek == 0.0 ? 0.0 : double.parse(data['amount'].toString())/maxSpendInWeek),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
