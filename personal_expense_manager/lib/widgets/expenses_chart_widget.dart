@@ -38,10 +38,10 @@ class ExpensesChart extends StatelessWidget {
       margin: EdgeInsets.all(10),
       child: Row(
         children: groupedTransactionValues.map((data) {
-          print("Total Spend: $maxSpendInWeek");
-          print("Spend Pct: " + data['amount'].toString());
-          return ChartBarWidget(data['day'], data['amount'],
-              double.parse(data['amount'].toString())/maxSpendInWeek);
+          return ChartBarWidget(
+              data['day'],
+              data['amount'],
+              maxSpendInWeek == 0.0 ? 0.0 : double.parse(data['amount'].toString())/maxSpendInWeek);
         }).toList(),
       ),
     );
