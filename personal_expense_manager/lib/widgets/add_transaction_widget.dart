@@ -31,14 +31,14 @@ class _AddTransactionWidgetState extends State<AddTransactionWidget> {
   void _submitData() {
     final title = _titleController.text;
     final amount = double.parse(_amountController.text);
-    if (title.isEmpty || amount <= 0) {
+    if (title.isEmpty || amount <= 0 || _selectedDate == null) {
       print("Invalid inputs while entering transaction");
       return;
     }
     // The state object can access the widget whose state it
     // manages by using the magic 'widget' object allowing us
     // to access methods/members from the widget.
-    widget.addTx(title, amount);
+    widget.addTx(title, amount, _selectedDate);
     // Close the modal screen after we have finished entering
     // the transaction.
     Navigator.of(context).pop();
