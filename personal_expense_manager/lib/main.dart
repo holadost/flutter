@@ -46,6 +46,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [];
+  bool _showChart = true;
 
   // TODO: Figure out how list properties work.
   List<Transaction> get _recentTransactions {
@@ -87,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text("My Expenses"),
       actions: <Widget>[
@@ -95,6 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () => _startAddNewTransaction(context))
       ],
     );
+    final txListWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+            0.6,
+        child: TransactionsWidget(
+            _userTransactions, _deleteTransactions));
+    final chartWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+            0.4,
+        child: ExpensesChart(_recentTransactions));
+
     return Scaffold(
       appBar: appBar,
       body: Container(
@@ -103,13 +119,23 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                    height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.4,
-                    child: ExpensesChart(_recentTransactions)),
-                Container(
-                    height: (MediaQuery.of(context).size.height - appBar.preferredSize.height - MediaQuery.of(context).padding.top) * 0.6,
-                    child: TransactionsWidget(
-                        _userTransactions, _deleteTransactions))
+                if (isLandscape) Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Show Chart"),
+                    Switch(value: _showChart, onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    })
+                  ],
+                ),
+                if (isLandscape)
+                _showChart ? chartWidget: txListWidget, // We are in landscape mode. Show either the chart of list,
+                if (!isLandscape)
+                  chartWidget, // Portrait mode. Show chart.
+                if (!isLandscape)
+                  txListWidget, // Portrait mode. Show list.
               ],
             ),
           )),
