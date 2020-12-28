@@ -47,7 +47,16 @@ class TransactionsWidget extends StatelessWidget {
                         ),
                       )),
                 ),
-                trailing: IconButton(
+                trailing: MediaQuery.of(context).size.width > 400 ?
+                    // If we have enough width, show the delete icon and
+                    // a text with delete. Otherwise, just show icon.
+                FlatButton.icon(
+                    onPressed: () => _deleteTx(_allTransactions[idx].id),
+                    icon: Icon(Icons.delete),
+                    textColor: Theme.of(context).errorColor,
+                    label: Text("Delete"),
+                ) :
+                IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () => _deleteTx(_allTransactions[idx].id),
                     color: Theme.of(context).errorColor),
