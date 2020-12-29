@@ -13,9 +13,9 @@ class CategoryItemWidget extends StatelessWidget {
   void _selectCategory(BuildContext ctx) {
     // Note: We cannot directly push our screen here. But instead,
     // we must wrap it with the MaterialPageRoute before sending it.
-    Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-      return CategoryScreen(id, title);
-    }));
+    Navigator.of(ctx).pushNamed(
+        '/category-screen',
+        arguments: {'id': id, 'title': title});
   }
 
   @override
