@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './screens/categories_screen.dart';
+
 void main() {
   // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations(
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Personal Expenses',
-      home: MyHomePage(),
+      home: CategoriesScreen(),
     );
   }
 }

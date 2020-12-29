@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 import '../widgets/category_item.dart';
 
+// This is the home page screen.
 class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final appBar = AppBar(title: const Text("My Recipes"));
+    final homeBody = Container(
       child: GridView(
-        children: <Widget>[...DUMMY_CATEGORIES.map((e) {
-          return CategoryItem(title: e.title, color: e.color);
-        }).toList()
+        children: <Widget>[
+          ...DUMMY_CATEGORIES.map((e) {
+            return CategoryItem(title: e.title, color: e.color);
+          }).toList()
         ],
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
@@ -18,6 +21,10 @@ class CategoriesScreen extends StatelessWidget {
             crossAxisSpacing: 20,
             mainAxisSpacing: 20),
       ),
+    );
+    return Scaffold(
+      appBar: appBar,
+      body: homeBody,
     );
   }
 }
