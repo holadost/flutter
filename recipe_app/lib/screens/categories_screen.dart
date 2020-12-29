@@ -10,6 +10,7 @@ class CategoriesScreen extends StatelessWidget {
     final appBar = AppBar(title: const Text("My Recipes"));
     final homeBody = Container(
       child: GridView(
+        padding: const EdgeInsets.all(15),
         children: <Widget>[
           ...DUMMY_CATEGORIES.map((e) {
             return CategoryItem(title: e.title, color: e.color);
