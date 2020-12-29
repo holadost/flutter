@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // This screen displays the information pertaining to a single
 // Category.
 class CategoryScreen extends StatelessWidget {
-
+  static const String routeName = '/category-screen';
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments as Map<String, String>;

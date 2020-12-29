@@ -35,9 +35,12 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: CategoriesScreen(),
+      // home: CategoriesScreen(),
       routes: {
-        '/category-screen': (ctx) => CategoryScreen()
+        // Instead of defining a home attribute, we can directly
+        // define the "/" which refers to home.
+        "/": (ctx) => CategoriesScreen(),
+        CategoryScreen.routeName: (ctx) => CategoryScreen()
       },
     );
   }
