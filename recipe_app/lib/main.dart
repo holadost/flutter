@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/screens/category_screen.dart';
 
+import './screens/category_screen.dart';
+import './screens/meal_screen.dart';
 import './screens/categories_screen.dart';
 
 void main() {
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         // Instead of defining a home attribute, we can directly
         // define the "/" which refers to home.
         "/": (ctx) => CategoriesScreen(),
-        CategoryScreen.routeName: (ctx) => CategoryScreen()
+        CategoryScreen.routeName: (ctx) => CategoryScreen(),
+        MealScreen.routeName: (ctx) => MealScreen()
       },
     );
   }

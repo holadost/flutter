@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/models/meal.dart';
+import 'package:recipe_app/screens/meal_screen.dart';
 
 
 class MealItemWidget extends StatelessWidget {
+  final String id;
   final String title;
   final String imageURL;
   final int duration;
@@ -11,6 +13,7 @@ class MealItemWidget extends StatelessWidget {
   final Affordability affordability;
 
   MealItemWidget({
+    @required this.id,
     @required this.title,
     @required this.imageURL,
     @required this.duration,
@@ -28,6 +31,7 @@ class MealItemWidget extends StatelessWidget {
     if (complexity == Complexity.Hard) {
       return 'Hard';
     }
+    return 'None';
   }
 
   String get affordabilityText {
@@ -40,16 +44,22 @@ class MealItemWidget extends StatelessWidget {
     if (affordability == Affordability.Luxurious) {
       return 'Luxurious';
     }
+    return 'None';
   }
 
-  void _selectMeal() {
-
+  void _selectMeal(BuildContext context) {
+    // Navigate to the meal screen.
+    Navigator.of(context).pushNamed(
+        MealScreen.routeName,
+        arguments: {
+          'id': id,
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selectMeal,
+      onTap: () => _selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
