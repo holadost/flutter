@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/models/meal.dart';
 
@@ -16,6 +17,30 @@ class MealItemWidget extends StatelessWidget {
     @required this.complexity,
     @required this.affordability
   });
+
+  String get complexityText {
+    if (complexity == Complexity.Simple) {
+      return 'Simple';
+    }
+    if (complexity == Complexity.Challenging) {
+      return 'Challenging';
+    }
+    if (complexity == Complexity.Hard) {
+      return 'Hard';
+    }
+  }
+
+  String get affordabilityText {
+    if (affordability == Affordability.Affordable) {
+      return 'Affordable';
+    }
+    if (affordability == Affordability.Pricey) {
+      return 'Pricey';
+    }
+    if (affordability == Affordability.Luxurious) {
+      return 'Luxurious';
+    }
+  }
 
   void _selectMeal() {
 
@@ -47,8 +72,60 @@ class MealItemWidget extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
+                ),
+                // The positioned widget works only inside a stack to
+                // allow us to place an element above another element
+                // at the position/location that we want.
+                Positioned(
+                  bottom: 20,
+                  right: 20,
+                  child: Container(
+                    width: 300,
+                    color: Colors.black54,
+                    padding: EdgeInsets.all(5),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 26,
+                        color: Colors.white),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
                 )
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                // We add the mainAxisAlignment here to add space
+                // between the various elements in the row.
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.schedule),
+                      SizedBox(width: 5),
+                      Text('$duration min'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.work),
+                      SizedBox(width: 5),
+                      Text(complexityText),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.attach_money),
+                      SizedBox(width: 5),
+                      Text(affordabilityText),
+                    ],
+                  ),
+                ],
+              ),
             )
           ],
         ),
