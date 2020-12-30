@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/dummy_meals.dart';
+import '../widgets/meal_item_widget.dart';
 
 // This screen displays all the meals pertaining to a single
 // category.
@@ -18,14 +19,19 @@ class CategoryScreen extends StatelessWidget {
     }).toList();
     final mealsBody = Container(
         child: ListView.builder(
-      itemBuilder: (ctx, ii) {
-        return Text(categoryMeals[ii].title);
-      },
-      itemCount: categoryMeals.length,
-    ));
+            itemBuilder: (ctx, ii) {
+              return MealItemWidget(
+                  title: categoryMeals[ii].title,
+                  duration: categoryMeals[ii].duration,
+                  complexity: categoryMeals[ii].complexity,
+                  affordability: categoryMeals[ii].affordability,
+                  imageURL: categoryMeals[ii].imageUrl);
+            },
+            itemCount: categoryMeals.length));
     final appBar = AppBar(
       title: Text(categoryTitle),
     );
+
     return Scaffold(
       appBar: appBar,
       body: mealsBody,
