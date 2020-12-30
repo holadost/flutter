@@ -11,9 +11,7 @@ class MealScreen extends StatelessWidget {
     final themeData = Theme.of(ctx);
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey)
-      ),
+          color: Colors.white, border: Border.all(color: Colors.grey)),
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
       height: 200,
@@ -70,17 +68,19 @@ class MealScreen extends StatelessWidget {
       );
     }
     final meal = meals[0];
-    final recipeBody = Column(
-      children: [
-        Container(
-            height: 300,
-            width: double.infinity,
-            child: Image.network(meal.imageUrl, fit: BoxFit.cover)),
-        _buildSectionTitle(context, "Ingredients"),
-        _buildMealListViews(context, meal, meal.ingredients),
-        _buildSectionTitle(context, "Steps"),
-        _buildMealListViews(context, meal, meal.steps),
-      ],
+    final recipeBody = SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(meal.imageUrl, fit: BoxFit.cover)),
+          _buildSectionTitle(context, "Ingredients"),
+          _buildMealListViews(context, meal, meal.ingredients),
+          _buildSectionTitle(context, "Steps"),
+          _buildMealListViews(context, meal, meal.steps),
+        ],
+      ),
     );
 
     final appBar = AppBar(
