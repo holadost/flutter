@@ -23,15 +23,9 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final passedProduct = ModalRoute.of(context).settings.arguments as Product;
-    final products = Provider.of<ProductsProvider>(context).items;
-    final Product product = products.firstWhere((prd) {
-      if (prd.id == passedProduct.id) {
-        return true;
-      }
-      return false;
-    });
+    final provider = Provider.of<ProductsProvider>(context);
+    final product = provider.getProduct(passedProduct.id);
     if (product == null) {
-      print("Unable to find the given product");
       return Text("Unable to find the product");
     }
 

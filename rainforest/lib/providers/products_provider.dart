@@ -10,7 +10,21 @@ class ProductsProvider with ChangeNotifier {
     return [..._items];
   }
 
-  void _addProduct() {
+  void addProduct() {
     notifyListeners();
+  }
+
+  Product getProduct(String prodID) {
+    final Product product = items.firstWhere((prd) {
+      if (prd.id == prodID) {
+        return true;
+      }
+      return false;
+    });
+    if (product == null) {
+      print("Unable to find the given product");
+      return null;
+    }
+    return product;
   }
 }
