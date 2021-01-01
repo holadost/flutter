@@ -14,5 +14,11 @@ class Product with ChangeNotifier {
     @required this.desc,
     @required this.price,
     @required this.imageURL,
-    this.isFave});
+    this.isFave=false});
+
+  void toggleFavorite() {
+    isFave = !isFave;
+    // This is similar to setState(). This will rebuild the widget.
+    notifyListeners();
+  }
 }
