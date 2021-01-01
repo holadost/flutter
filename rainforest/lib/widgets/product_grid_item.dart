@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rainforest/screens/product_screen.dart';
 
-import '../models/product.dart';
+import '../providers/product.dart';
 
 class ProductGridItemWidget extends StatelessWidget {
   final Product product;
