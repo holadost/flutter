@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rainforest/screens/product_screen.dart';
 
 import '../models/product.dart';
 
@@ -11,7 +12,8 @@ class ProductGridItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Hello World!");
+        Navigator.of(context).pushNamed(
+            ProductScreen.routeName, arguments: product);
       },
       child: GridTile(
         child: ClipRRect(
