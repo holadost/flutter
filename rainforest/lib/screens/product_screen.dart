@@ -23,7 +23,11 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final passedProduct = ModalRoute.of(context).settings.arguments as Product;
-    final provider = Provider.of<ProductsProvider>(context);
+    // We set the listen: false here since we just want the data from the
+    // global store and don't really care if it changes. If the data does
+    // change, the user will see the new data after they leave the screen
+    // and re-enter the screen again.
+    final provider = Provider.of<ProductsProvider>(context, listen: false);
     final product = provider.getProduct(passedProduct.id);
     if (product == null) {
       return Text("Unable to find the product");
