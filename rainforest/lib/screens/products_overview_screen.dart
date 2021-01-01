@@ -26,7 +26,12 @@ class ProductsOverviewScreen extends StatelessWidget {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
         itemBuilder: (ctx, ii) {
-          return ProductGridItemWidget(products[ii]);
+          // We do this here so that if we change the isFave field for a
+          // product(may be from outside the app), then the product grid
+          // item must reflect the same.
+          return ChangeNotifierProvider(
+              create: (c) => products[ii],
+              child: ProductGridItemWidget());
         });
     return body;
   }

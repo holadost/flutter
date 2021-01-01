@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:rainforest/screens/product_screen.dart';
+import 'package:provider/provider.dart';
+import '../screens/product_screen.dart';
+import '../providers/product.dart';
+
 
 import '../providers/product.dart';
 
 class ProductGridItemWidget extends StatelessWidget {
-  final Product product;
-
-  ProductGridItemWidget(this.product);
-
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context);
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(

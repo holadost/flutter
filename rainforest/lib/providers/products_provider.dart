@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'product.dart';
+import './product.dart';
 import '../data/dummy_products.dart';
 
 class ProductsProvider with ChangeNotifier {
