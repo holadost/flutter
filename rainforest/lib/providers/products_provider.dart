@@ -6,7 +6,22 @@ import '../data/dummy_products.dart';
 class ProductsProvider with ChangeNotifier {
   List<Product> _items = [...DUMMY_PRODUCTS];
   // Return a copy of _items.
+
+
   List<Product> get items {
+    return [..._items];
+  }
+
+  List<Product> getFavoriteProducts() {
+    return _items.where((element) {
+      if (element.isFave) {
+        return true;
+      }
+      return false;
+    }).toList();
+  }
+
+  List<Product> getAllProducts() {
     return [..._items];
   }
 

@@ -4,18 +4,49 @@ import 'package:provider/provider.dart';
 import '../providers/products_provider.dart';
 import '../widgets/product_grid_item.dart';
 
-class ProductsOverviewScreen extends StatelessWidget {
+enum FilterOptions {
+  Favorites,
+  All,
+}
+
+class ProductsOverviewScreen extends StatefulWidget {
   static const String routeName = "/products-overview-screen";
-  Widget _buildAppBar(BuildContext context) {
+
+  @override
+  _ProductsOverviewScreenState createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+  var showFavoritesOnly = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final prodProvider = Provider.of<ProductsProvider>(context);
     final appBar = AppBar(
       title: Text('Rainforest'),
+      actions: [
+        PopupMenuButton(
+          onSelected: (FilterOptions sv) {
+            setState(() {
+              if (sv == FilterOptions.Favorites) {
+                showFavoritesOnly = true;
+              } else if (sv == FilterOptions.All) {
+                showFavoritesOnly = false;
+              }
+            });
+          },
+          icon: Icon(Icons.more_vert),
+          itemBuilder: (_) => [
+            PopupMenuItem(
+                child: Text('Favorites'), value: FilterOptions.Favorites),
+            PopupMenuItem(child: Text('All'), value: FilterOptions.All),
+          ],
+        )
+      ],
     );
-    return appBar;
-  }
-
-  Widget _buildBody(BuildContext context) {
-    final prodProvider = Provider.of<ProductsProvider>(context);
-    final products = prodProvider.items;
+    final products = showFavoritesOnly
+        ? prodProvider.getFavoriteProducts()
+        : prodProvider.getAllProducts();
     final body = GridView.builder(
         padding: const EdgeInsets.all(10.0),
         itemCount: products.length,
@@ -32,14 +63,9 @@ class ProductsOverviewScreen extends StatelessWidget {
               create: (c) => products[ii],
               child: ProductGridItemWidget());
         });
-    return body;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
-      body: _buildBody(context),
+      appBar: appBar,
+      body: body,
     );
   }
 }

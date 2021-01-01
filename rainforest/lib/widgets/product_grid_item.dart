@@ -3,9 +3,6 @@ import 'package:provider/provider.dart';
 import '../screens/product_screen.dart';
 import '../providers/product.dart';
 
-
-import '../providers/product.dart';
-
 class ProductGridItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
