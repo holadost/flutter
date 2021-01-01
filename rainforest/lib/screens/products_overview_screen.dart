@@ -5,6 +5,7 @@ import '../widgets/product_grid_item.dart';
 
 
 class ProductsOverviewScreen extends StatelessWidget {
+  static const String routeName = "/products-overview-screen";
   final products = DUMMY_PRODUCTS;
 
   Widget _buildAppBar(BuildContext context) {
