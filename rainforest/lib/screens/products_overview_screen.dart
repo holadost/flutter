@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../data/dummy_products.dart';
+import '../models/product.dart';
+import '../providers/products_provider.dart';
 import '../widgets/product_grid_item.dart';
-
 
 class ProductsOverviewScreen extends StatelessWidget {
   static const String routeName = "/products-overview-screen";
-  final products = DUMMY_PRODUCTS;
-
   Widget _buildAppBar(BuildContext context) {
     final appBar = AppBar(
       title: Text('Rainforest'),
@@ -16,6 +15,8 @@ class ProductsOverviewScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
+    final prodProvider = Provider.of<ProductsProvider>(context);
+    final products = prodProvider.items;
     final body = GridView.builder(
         padding: const EdgeInsets.all(10.0),
         itemCount: products.length,
