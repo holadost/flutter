@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/products_provider.dart';
-import '../widgets/product_grid_item.dart';
+import '../widgets/products_grid_widget.dart';
 
 enum FilterOptions {
   Favorites,
@@ -21,8 +21,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("Building products overview screen");
     final prodProvider = Provider.of<ProductsProvider>(context);
-    final appBar = AppBar(
+    final products = showFavoritesOnly
+        ? prodProvider.getFavoriteProducts()
+        : prodProvider.getAllProducts();
+    print("Total number of products: ${products.length}");
+    print("Show favorites: ${showFavoritesOnly}");
+    var appBar = AppBar(
       title: Text('Rainforest'),
       actions: [
         PopupMenuButton(
@@ -44,28 +50,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         )
       ],
     );
-    final products = showFavoritesOnly
-        ? prodProvider.getFavoriteProducts()
-        : prodProvider.getAllProducts();
-    final body = GridView.builder(
-        padding: const EdgeInsets.all(10.0),
-        itemCount: products.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.5,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10),
-        itemBuilder: (ctx, ii) {
-          // We do this here so that if we change the isFave field for a
-          // product(may be from outside the app), then the product grid
-          // item must reflect the same.
-          return ChangeNotifierProvider(
-              create: (c) => products[ii],
-              child: ProductGridItemWidget());
-        });
     return Scaffold(
       appBar: appBar,
-      body: body,
+      body: ProductsGrid(showFavoritesOnly),
     );
   }
 }

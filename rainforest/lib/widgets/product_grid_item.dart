@@ -6,7 +6,9 @@ import '../providers/product.dart';
 class ProductGridItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("Fetching product provider");
     final product = Provider.of<Product>(context);
+    print("Successfully fetched product provider for product: ${product.title}");
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(

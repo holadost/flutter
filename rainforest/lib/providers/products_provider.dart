@@ -13,12 +13,17 @@ class ProductsProvider with ChangeNotifier {
   }
 
   List<Product> getFavoriteProducts() {
-    return _items.where((element) {
+    var newItems = _items.where((element) {
       if (element.isFave) {
+        print("Product: ${element.title} is a favorite");
         return true;
       }
       return false;
     }).toList();
+    for (int ii = 0; ii < newItems.length; ii++) {
+      print("Selected product: ${newItems[ii].title}");
+    }
+    return newItems;
   }
 
   List<Product> getAllProducts() {
