@@ -29,7 +29,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
     print("Total number of products: ${products.length}");
     print("Show favorites: ${showFavoritesOnly}");
     var appBar = AppBar(
-      title: Text('Rainforest'),
+      title: Text('Rainforest: ${showFavoritesOnly}'),
       actions: [
         PopupMenuButton(
           onSelected: (FilterOptions sv) {
