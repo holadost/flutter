@@ -13,7 +13,7 @@ class ProductsGrid extends StatelessWidget {
     final products = showFavoritesOnly
         ? prodProvider.getFavoriteProducts()
         : prodProvider.getAllProducts();
-
+    print("Total number of products: ${products.length}");
     return GridView.builder(
         padding: const EdgeInsets.all(10.0),
         itemCount: products.length,
@@ -26,12 +26,9 @@ class ProductsGrid extends StatelessWidget {
           // We do this here so that if we change the isFave field for a
           // product(may be from outside the app), then the product grid
           // item must reflect the same.
-          return ChangeNotifierProvider(
-              create: (c) {
-                print("Passing product: ${products[ii].title}");
-                return products[ii];
-              },
-              child: ProductGridItemWidget());
+          return ChangeNotifierProvider.value(
+              value: products[ii],
+              child: new ProductGridItemWidget());
         });
   }
 }
