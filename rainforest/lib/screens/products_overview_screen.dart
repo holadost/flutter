@@ -22,36 +22,29 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     print("Building products overview screen");
-    final prodProvider = Provider.of<ProductsProvider>(context);
-    final products = showFavoritesOnly
-        ? prodProvider.getFavoriteProducts()
-        : prodProvider.getAllProducts();
-    print("Total number of products: ${products.length}");
-    print("Show favorites: ${showFavoritesOnly}");
-    var appBar = AppBar(
-      title: Text('Rainforest: ${showFavoritesOnly}'),
-      actions: [
-        PopupMenuButton(
-          onSelected: (FilterOptions sv) {
-            setState(() {
-              if (sv == FilterOptions.Favorites) {
-                showFavoritesOnly = true;
-              } else if (sv == FilterOptions.All) {
-                showFavoritesOnly = false;
-              }
-            });
-          },
-          icon: Icon(Icons.more_vert),
-          itemBuilder: (_) => [
-            PopupMenuItem(
-                child: Text('Favorites'), value: FilterOptions.Favorites),
-            PopupMenuItem(child: Text('All'), value: FilterOptions.All),
-          ],
-        )
-      ],
-    );
     return Scaffold(
-      appBar: appBar,
+      appBar: AppBar(
+        title: Text('Rainforest: ${showFavoritesOnly}'),
+        actions: [
+          PopupMenuButton(
+            onSelected: (FilterOptions sv) {
+              setState(() {
+                if (sv == FilterOptions.Favorites) {
+                  showFavoritesOnly = true;
+                } else if (sv == FilterOptions.All) {
+                  showFavoritesOnly = false;
+                }
+              });
+            },
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                  child: Text('Favorites'), value: FilterOptions.Favorites),
+              PopupMenuItem(child: Text('All'), value: FilterOptions.All),
+            ],
+          )
+        ],
+      ),
       body: ProductsGrid(showFavoritesOnly),
     );
   }
